@@ -36,7 +36,8 @@
         - 수동
             - 직접 기입
             - 패키지 == 버전
-        - 자동 :
+        - 자동 
+            - 개발이 다 종료된 후, 개발중에 생성된다면
             - pip freeze > requirement.txt
     - 설치
         - pip install 패키지명
