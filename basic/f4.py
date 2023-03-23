@@ -14,7 +14,7 @@
                     url : "http://127.0.0.1:5000/link"
                     param : "name=hello&age=100",
                     success : (res) => {}
-                    error : () => {}
+                    error : (err) => {}
                 })
         - 서버
             - GET 방식 데이터 추출
