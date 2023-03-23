@@ -44,7 +44,7 @@
         - cd ./flask_test/Scripts
     - 가상환경 활성화
         - activate(Window) or . activate(Mac, Linux)
-    - 최종 프롬포트 형태ㄴ
+    - 최종 프롬포트 형태
         - (flask_test) : 윈도우
         - (flask_test) $ : 맥/리눅스 사용자 계정
         - (flask_test) # : 맥/리눅스 루트 계정
