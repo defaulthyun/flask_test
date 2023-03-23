@@ -7,11 +7,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 # 접속 URL 설정
-@app.route('/')
+@app.route("/")
 def hello():
     return "hello world!"
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # Web 상에 기본 포트 : http -> 80 -> 생략가능
     # 나중에 웹서버(apache, nginx)와 연동
-    app.run(host = '0.0.0.0', port = 5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
