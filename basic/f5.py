@@ -16,8 +16,8 @@
                 })
         - 서버
             - POST 방식 데이터 추출
-                - name = request.form.post('name')
-                - age = request.form.post('age')
+                - name = request.form.get('name')
+                - age = request.form.get('age')
     - /link쪽으로 요청하는 방식은 다양 할 수 있다, 단 사이트 설계 상 1가지로만 정의된다면
     다른 방식의 접근은 모두 비정상적인 접근( 웹 크롤링, 스크래핑, 해킹 등)
     이런 접근 필터링 할 것인가? >> 보안의 기본사항
@@ -30,19 +30,25 @@ from flask_cors import CORS
 # Flask 객체 인스턴스 생성
 app = Flask(__name__)
 
+
+@app.route("/")
+def hello():
+    return "hello world!"
+
+
 # @app.route : 기본적인 GET 방식
 # 메소드 추가는 => methods=['POST', ...]
 @app.route("/login", methods=["GET", "POST"])
 def login():
     # method 별 분기
     if request.method == "GET":
-        return "GET error"
+        return render_template("login.html")
     elif request.method == "POST":
 
         # request.form['id'] : 값이 누락되면 서버 셧다운됨
         # 1. 로그인 정보 획득
-        id = request.form.post("id")
-        pw = request.form.post("pw")  # 암호는 차후에 해싱 암호화(관리자도 볼 수 없다)
+        id = request.form.get("id")
+        pw = request.form.get("pw")  # 암호는 차후에 해싱 암호화(관리자도 볼 수 없다)
         print(id, pw)
 
         # 2. 회원 여부 쿼리
