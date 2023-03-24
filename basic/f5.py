@@ -48,12 +48,12 @@ def login():
 
         # request.form['id'] : 값이 누락되면 서버 셧다운됨
         # 1. 로그인 정보 획득
-        id = request.form.get("id")
-        pw = request.form.get("pw")  # 암호는 차후에 해싱 암호화(관리자도 볼 수 없다)
-        print(id, pw)
+        uid = request.form.get("id")
+        upw = request.form.get("pw")  # 암호는 차후에 해싱 암호화(관리자도 볼 수 없다)
+        print(uid, upw)
 
         # 2. 회원 여부 쿼리
-        select_login()
+        select_login(uid, upw)
 
         # 3. 회원 여부에 따른 처리
         # 3-1. 세션 생성, 기타 필요한 조치 수행
