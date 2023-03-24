@@ -26,6 +26,7 @@
 import os
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from flask_cors import CORS
+from d4 import select_login
 
 # Flask 객체 인스턴스 생성
 app = Flask(__name__)
@@ -52,6 +53,7 @@ def login():
         print(id, pw)
 
         # 2. 회원 여부 쿼리
+        select_login()
 
         # 3. 회원 여부에 따른 처리
         # 3-1. 세션 생성, 기타 필요한 조치 수행
