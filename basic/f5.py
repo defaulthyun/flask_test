@@ -53,15 +53,19 @@ def login():
         print(uid, upw)
 
         # 2. 회원 여부 쿼리
-        select_login(uid, upw)
+        result = select_login(uid, upw)
 
         # 3. 회원 여부에 따른 처리
-        # 3-1. 세션 생성, 기타 필요한 조치 수행
+        if result:
+            # 3-1. 세션 생성, 기타 필요한 조치 수행
+            # 3-2. 서비스 메인 화면으로 이동
+            pass
+        else:
+            # 4. 회원 아닐 시
+            return render_template("error.html")
 
-        # 3-2. 서비스 메인 화면으로 이동
-
-        # 3-3. 회원 아닐 시 적당한 메시지 후 다시 로그인 유도
-        return redirect("http://www.naver.com")  # 요청을 다른 URL로 포워딩한다.
+        # 임시 : 회원 아닐 시 적당한 메시지 후 다시 로그인 유도
+        # return redirect("http://www.naver.com")  # 요청을 다른 URL로 포워딩한다.
 
 
 if __name__ == "__main__":
