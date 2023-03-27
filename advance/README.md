@@ -1,6 +1,7 @@
-# Flask Entry Point
+# Flask Entry Point : step1_flask_run
     - 서버에 운영되는 방식에 맞춰 구성
     - 명령어 조정 : Flask 명령어 사용
+    - flask --app start_app -- debug run
 
 # 애플리케이션 팩토리
     - 플라스크 객체 관리 및 중복 참조를 배제하기 위한 구성
@@ -10,6 +11,7 @@
 
 # BootStrap
     - 부트스트랩 적용, 베이스 페이지 구성
+    - 디자인 적용 기준 설정
 
 # 입력 폼 유효성
     - 계획된 루트가 아닌 방식으로 진입 시 이를 리젝하는 처리(보안기능)
