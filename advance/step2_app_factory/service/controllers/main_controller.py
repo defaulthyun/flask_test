@@ -15,7 +15,7 @@ def home():
     return render_template("index.html")
 
 
-@main.route("/question", method=("GET", "POST"))
+@main.route("/question")
 def question():
     form = FormQuestion()
     return render_template("question.html", wtf=form)
