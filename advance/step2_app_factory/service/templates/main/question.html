@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    <div class = 'container'>
+        <table class = "table">
+            <thead>
+                <tr class = 'table-dark'>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <fieldset>
+        <h4>질문 등록</h4>
+        <form method = "post" class = "my-3">
+            {# CSRF 토큰#}
+            {{wtf.csrf_token}}
+            {# 폼 유효성 검사후 오류 내용 출력(생략가능) #}
+            {# 입력 - 질문에 제목 #}
+            {{wtf.title.label}}
+            {{wtf.title( class = "form-control")}}
+            {# 입력 - 질문에 내용 #}
+            {# 전송 기능 #}
+        </form>
+    </fieldset>
+    </div>
+    {% endblock %}
+</body>
+</html>
