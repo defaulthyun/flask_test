@@ -20,6 +20,13 @@
     <script>
         $('button').on('click', ()=>{
             console.log('로그인 버튼이 눌림')
+            $.post({
+                url:'/auth/login',
+                data:{uid:'guest', upw:'1234'},
+                success:res=>{
+                    console.log(res)
+                }
+            })
         })
     </script>
     {% endblock %}
