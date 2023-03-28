@@ -9,9 +9,13 @@ def home():
     return "auth home"
 
 
-@auth.route("/login")
+@auth.route("/login", methods=["GET", "POST"])
 def login():
-    return "auth login"
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        # jwt 관련 체크 -> 정상(200), 오류(401)
+        return "jwt 체크 완료"
 
 
 @auth.route("/logout")
