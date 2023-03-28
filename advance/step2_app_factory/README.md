@@ -76,7 +76,12 @@
             - 문제점 
                 - 사용자는 빈번하게 로그인 -> 불편함, 오버헤드(서버측) 
             - 해결책 
-                -만료시간 연장 전략 혹은 리플레시토큰을 서버측을 저장해서 이를 기반으로 토큰 기간을 갱신 (2단계 진행)
+                - 만료시간 연장 전략 혹은 리플레시토큰을 서버측을 저장해서 이를 기반으로 토큰 기간을 갱신 (2단계 진행)
     - 설치
         - pip install PyJWT bcrypt
+    - 참고문헌
+        - [📚 JWT 토큰 인증 이란? - 💯 이해하기 쉽게 정리](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-JWTjson-web-token-%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
+        - [JWT 토큰 암호화 알고리즘 - HS256과 RS256](https://velog.io/@ddangle/JWT-%ED%86%A0%ED%81%B0-%EC%95%94%ED%98%B8%ED%99%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-HS256%EA%B3%BC-RS256)
+        - [RS256, HS256 차이](https://hwannny.tistory.com/72)
+        - [JWT(Json Web Token) 알아가기](https://brunch.co.kr/@jinyoungchoi95/1)
 
