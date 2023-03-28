@@ -5,7 +5,7 @@
         
 """
 
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from service.controllers import bp_main as main
 from service.forms import FormQuestion
 
@@ -15,7 +15,10 @@ def home():
     return render_template("index.html")
 
 
-@main.route("/question")
+@main.route("/question", methods=["GET", "POST"])
 def question():
     form = FormQuestion()
+    # 제목, 내용을 알맞게 입력 시, 메인페이지로 이동 시킨다
+    if request.method == "POST" and form.validate_on_submit():
+        return redirect(url_for("main_bp.home"))  # ~/main
     return render_template("question.html", wtf=form)
