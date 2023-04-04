@@ -6,7 +6,10 @@ from datetime import datetime, timedelta
 
 # Flask 객체 획득
 from flask import current_app
+
+# 암호화 관련
 import jwt
+import bcrypt
 
 # ~/auth
 @auth.route("/")
@@ -55,6 +58,15 @@ def logout():
 
 @auth.route("/signup")
 def signup():
+    
+    # 비밀번호 암호화
+    password = "1234"
+
+    # 암호화된 값은 DB에 패스워드 컬럼에 저장
+    bcrypt_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    # 확인 및 복호화
+    print(password, bcrypt_pw, bcrypt.checkpw(password.encode('utf-8'),b))
+
     return "auth signup"
 
 
