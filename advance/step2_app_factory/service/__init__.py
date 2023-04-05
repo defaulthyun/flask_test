@@ -1,17 +1,25 @@
-import os
+# 사용자가 정의한(커스텀) 엔트리 포인트
 from flask import Flask
+# TODO : ORM을 위한 추가
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 """
     create_app는 플라스크 내부에서 정의된 함수명(수정 X)
     flask run을 수행하면 내부적으로 엔트리포인트 모듈에서 create_app() 를 찾는다   
     차후, 다른 모듈에서는 flask.current_app 이라는 변수로 app을 접근 할 수 있다(모듈가져오기)
 """
-
+# ORM 전역 변수 선언
+db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
     # 환경 변수 초기화
     init_environment(app)
+
+    # DB 초기화
+    init_database(app)
 
     # 블루프린트 초기화
     init_blueprint(app)
@@ -36,6 +44,24 @@ def init_environment(app):
     for k, v in app.config.items():
         print(k, v)
         print("-" * 20 + "\n")
+    pass
+
+def init_database(app):
+
+    # pool
+    # from .model import pool_sql
+    # pool_sql.init_pool()
+
+    # 테스트
+    # print(pool_sql.login('test','test'))
+
+    # orm을 위한 flask 객체, sql..객체, migr 객체 연결
+    db.init_app(app)
+    migrate.init_app(app,db)
+
+    #from .model import models
+
+
     pass
 
 

@@ -107,3 +107,31 @@
         - 해결은 했으나, 개선점이 필요한 코드
     - XXX
         - 이 부분은 큰 문제점, 오류를 가지고 있다
+
+# DB 연동
+
+    - pool(풀링기법)
+        - 백앤드 서버 가동 시, Backend - DB 간 일정량의 커넥션을 따라 맺어서
+        - 큐(Queue: FIFO)에서 담아서 관리
+        - 접속과 해제라는 반복 작업에 따른 응답시간지연원인을 제거, 일정량의 동접이 발생 시, 안정적인 처리 속도 제공
+    - orm
+        - 객체지향방식을 코드에서 DB 연동 및 처리등 관리
+        - 원칙적으로 SQL을 몰라도 처리가능
+            - DB Vendor가 교체되더라도 동일하게 작동
+        - 단점
+            - 쿼리가 최적화 되었다고 볼 수 없다 -> 기계적인 생성
+        - 설치
+            - pip install sqlalchemy flask-migrate
+    - DB 생성
+        - FLASK_APP=service 은 없어도 되는데, 이 앱은 app or wsfi로 시작하는 엔트리가 없어 별도로 지정해야된다.
+        - flask --app service db init
+        - MAC)FLASK_APP=service flask db init
+        - migrations 폴더가 새로 생성돈다
+            - 내부는 자동으로 만들어지는 구조이므로, 관려하지 않음
+            - 단 versions 밑으로 수정할때마다 새로운 버전 DB 관련 생성
+        - 모델(테이블) 생성, 변경
+            - flask --app service db migrate
+        - 모델(테이블) 생성, 변경 후 DB 적용
+            - flask --app service db upgrade
+        - 컨테이너 이미지 생성 시
+            - 위 명령들을 차례대로 수행해서 DB 초기화, 생성과정 수행
