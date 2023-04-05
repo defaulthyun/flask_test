@@ -185,4 +185,43 @@
                     de.session.commit()
                     ```
                 - 답변 등록
-                   -
+                   ```
+                        # 질문 2개 추가
+                        >>> q1 = Question(title="질문1", content="내용1", reg_date = datetime.now())
+                        >>> q2 = Question(title="질문2", content="내용2", reg_date = datetime.now())
+                        >>> db.session.add(q1)
+                        >>> db.session.add(q2)
+                        >>> db.session.commit()
+
+                        # 질문 1개를 찾고 답변을 등록
+                        >>> q2 = Question.query.get(2)
+                        >>> q2.title
+                        '질문1'
+                        >>> a = Answer(question=q2, content='질문1에 대한 답변', reg_date=datetime.now())
+                        >>> db.session.add(a)
+                        >>> db.session.commit()
+
+                        # 답변을 통해서 질문 찾기 & 질문을 통해서 답변 찾기
+                        ```
+                            >>> a.question
+                            <Question 2>
+                            >>> q2.answer_set # 역 참조의 이름을 사용하여 답변들을 다 찾아온다 [backref=db.backref('answer_set')]
+                            [<Answer 1>]
+                        ```
+                        # 질문을 삭제하면 답변도 다 삭제되는가? -> No
+                        db.session.delete(q2)
+                        db.session.commit()
+
+                        # 답변의 참조 question id 값만 NULL
+                        # 작성자가 서로 다르므로, 삭제 권리는 없고, 참조만 제거됨
+                        +----+-------------+--------------------------+---------------------+
+                        | id | question_id | content                  | reg_date            |
+                        +----+-------------+--------------------------+---------------------+
+                        |  1 |        NULL | 질문1에 대한 답변        | 2023-04-05 13:14:23 |
+                        +----+-------------+--------------------------+---------------------+
+
+                        # 본인 답변 삭제
+                        db.session.delete(a)
+                        db.session.commit()
+
+                   ```
