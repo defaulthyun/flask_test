@@ -59,7 +59,7 @@ def init_database(app):
     db.init_app(app)
     migrate.init_app(app,db)
 
-    #from .model import models
+    from .model import models
 
 
     pass

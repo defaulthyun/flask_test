@@ -125,13 +125,64 @@
     - DB 생성
         - FLASK_APP=service 은 없어도 되는데, 이 앱은 app or wsfi로 시작하는 엔트리가 없어 별도로 지정해야된다.
         - flask --app service db init
+            - sqllite : 소형 DB, 스마트폰에 사용되는 DB, DB 자동 생성 및 파일럿 형태에서 사용
+            - mysql와 같은 DB(케이스별 상이)는 실제로는 생성 안됨
         - MAC)FLASK_APP=service flask db init
         - migrations 폴더가 새로 생성돈다
             - 내부는 자동으로 만들어지는 구조이므로, 관려하지 않음
             - 단 versions 밑으로 수정할때마다 새로운 버전 DB 관련 생성
         - 모델(테이블) 생성, 변경
+            - model > models.py에 테이블 관련 내용 기술
+            - service> __init.py
+                - !!! from .model import models : 주석해제, 신규작성 !!!
             - flask --app service db migrate
         - 모델(테이블) 생성, 변경 후 DB 적용
             - flask --app service db upgrade
         - 컨테이너 이미지 생성 시
             - 위 명령들을 차례대로 수행해서 DB 초기화, 생성과정 수행
+
+    - 필요한 기능들 시뮬레이션
+        - DBA는 sql문을 작성해서 쿼리 구현
+        - ORM는 shell을 열어 파이썬 코드로 구현
+            - Flask --app service shell
+                - 질문 등록 (Insert)
+                    ```
+                    from service.model.models import Question, Answer
+                    from datetime import datetime
+                    q1 = Question(title="질문1", content="내용1", reg_dat
+                    e = datetime.now())
+                    from service import db
+                    db.session.add(q1)
+                    db.session.commit()
+                    ```
+                - 질문 조회
+                   ```
+                   # 전체 데이터 조회 : select * from question;
+                   qs = Question.query.all()
+                   ```
+                   # 일부 데이터 조회 : select * from question where
+                   qs[0].title >> '질문1'
+                   qs[0].id >>  1
+                   # id값을 넣어서 조회 : select * from question where id =1;
+                   Question.query.get(1)
+
+                   # 내용 중 '용' 문자열이 존재하면 다 가져오시오 : select * from question where content like '%용%';
+                   Question.query.filter( Question.content.like('%용%')).all()
+
+                - 질문 수정
+                    ```
+                    >>> q1 = Question.query.get(1)
+                    # 변경하고 싶은 부분만 수정
+                    # update question set title ='질문1을 변경' where id = 1;
+                    >>> q1.title = "질문1을 변경"
+                    >>> db.session.commit()
+                    ```
+                - 질문 삭제
+                    ```
+                    q1 = Question.query.get(1)
+                    # delete from question where id = 1;
+                    db.session.delete(q1)
+                    de.session.commit()
+                    ```
+                - 답변 등록
+                   -
